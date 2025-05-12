@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu LOT</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #ffffff;
+      color: #1d3557;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #1d3557;
+      color: #fcbf49;
+      padding: 1rem;
+      text-align: center;
+    }
+    .language-switch {
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .language-switch button {
+      margin: 0 10px;
+      padding: 5px 15px;
+      font-weight: bold;
+      background-color: #fcbf49;
+      border: none;
+      color: #1d3557;
+      cursor: pointer;
+    }
+    .section {
+      padding: 1rem;
+    }
+    .drink {
+      margin-bottom: 2rem;
+    }
+    .drink h3 {
+      margin: 0 0 0.5rem 0;
+    }
+    .ingredients {
+      list-style-type: disc;
+      margin-left: 1rem;
+    }
+    @media screen and (min-width: 600px) {
+      .drink {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="title">Menu drinków</h1>
+  </header>
+
+  <div class="language-switch">
+    <button onclick="setLanguage('pl')">PL</button>
+    <button onclick="setLanguage('en')">EN</button>
+  </div>
+
+  <main class="section" id="menu"></main>
+
+  <script>
+    const drinks = {
+      pl: [
+        {
+          name: "Blue Lagoon",
+          ingredients: ["Gin", "Syrop Blue Curacao", "Woda gazowana"]
+        },
+        {
+          name: "Irish Sunset",
+          ingredients: ["Irish Whiskey", "Syrop marakuja", "Nektar ananas"]
+        },
+        {
+          name: "Spiced Apricot",
+          ingredients: ["Morelówka", "Spiced Rum", "Nektar czarna porzeczka"]
+        }
+      ],
+      en: [
+        {
+          name: "Blue Lagoon",
+          ingredients: ["Gin", "Blue Curacao syrup", "Sparkling water"]
+        },
+        {
+          name: "Irish Sunset",
+          ingredients: ["Irish Whiskey", "Passion fruit syrup", "Pineapple nectar"]
+        },
+        {
+          name: "Spiced Apricot",
+          ingredients: ["Apricot vodka", "Spiced Rum", "Blackcurrant nectar"]
+        }
+      ]
+    };
+
+    function renderMenu(lang) {
+      const container = document.getElementById("menu");
+      const title = document.getElementById("title");
+      container.innerHTML = "";
+      title.innerText = lang === "pl" ? "Menu drinków" : "Cocktail Menu";
+
+      drinks[lang].forEach(drink => {
+        const div = document.createElement("div");
+        div.className = "drink";
+        div.innerHTML = `
+          <div>
+            <h3>${drink.name}</h3>
+            <ul class="ingredients">
+              ${drink.ingredients.map(i => `<li>${i}</li>`).join("")}
+            </ul>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function setLanguage(lang) {
+      renderMenu(lang);
+    }
+
+    renderMenu('pl');
+  </script>
+</body>
+</html>
