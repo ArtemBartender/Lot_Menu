@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -9,165 +8,134 @@
     body {
       margin: 0;
       font-family: sans-serif;
-      background: linear-gradient(to bottom right, #0b1c3d, #182d45);
-      color: #f2c76e;
+      background: linear-gradient(to bottom, #0d1c3e, #162c4f);
+      color: #e8b654;
       text-align: center;
     }
-    h1 { margin-top: 30px; font-size: 2em; }
-    .lang-switch, .category-switch {
+    h1 {
+      margin-top: 30px;
+    }
+    .btn-group, .filter-group {
+      margin: 15px auto;
       display: flex;
-      justify-content: center;
       flex-wrap: wrap;
-      margin: 20px 0;
+      justify-content: center;
       gap: 10px;
     }
-    .lang-switch button, .category-switch button {
-      border: none;
-      border-radius: 999px;
+    button {
       padding: 10px 20px;
-      background: #a26d28;
+      background-color: #8b5e3c;
+      border: none;
+      border-radius: 20px;
       color: white;
       font-weight: bold;
-      cursor: pointer;
     }
-    .divider {
-      height: 2px;
-      background-color: #a26d28;
-      margin: 10px auto;
+    hr {
+      border: none;
+      height: 1px;
+      background-color: #e8b654;
+      margin: 15px auto;
       width: 90%;
     }
-    .menu { display: flex; flex-direction: column; align-items: center; gap: 25px; padding-bottom: 50px; }
     .drink {
-      max-width: 90%;
-      background-color: rgba(255,255,255,0.05);
-      border-radius: 15px;
-      padding: 15px;
+      margin: 20px auto;
+      width: 80%;
+      max-width: 400px;
     }
-    .drink-name {
-      font-size: 1.2em;
-      font-weight: bold;
-      margin-bottom: 8px;
+    .drink h2 {
+      margin-bottom: 5px;
     }
-    .drink-ingredients {
+    .drink p {
+      margin: 2px 0;
       font-size: 0.95em;
-      line-height: 1.4;
-      color: #f2c76e;
     }
   </style>
 </head>
 <body>
   <h1 id="title">Menu drinków</h1>
-  <div class="lang-switch">
+  <div class="btn-group">
     <button onclick="setLanguage('pl')">PL</button>
     <button onclick="setLanguage('en')">EN</button>
   </div>
-  <div class="divider"></div>
-  <div class="category-switch">
-    <button onclick="setCategory('all')">Wszystkie</button>
-    <button onclick="setCategory('vodka')">Wódka</button>
-    <button onclick="setCategory('whiskey')">Whiskey & Bourbon</button>
-    <button onclick="setCategory('rum')">Rum</button>
-    <button onclick="setCategory('liqueur')">Likier</button>
-    <button onclick="setCategory('nonalcoholic')">Bezalkoholowe</button>
+  <hr />
+  <div class="filter-group">
+    <button onclick="filterCategory('all')">Wszystkie</button>
+    <button onclick="filterCategory('vodka')">Wódka</button>
+    <button onclick="filterCategory('whiskey')">Whiskey & Bourbon</button>
+    <button onclick="filterCategory('rum')">Rum</button>
+    <button onclick="filterCategory('liqueur')">Likier</button>
+    <button onclick="filterCategory('nonalcoholic')">Bezalcoholowe</button>
+    <button onclick="filterCategory('gin')">Gin</button>
   </div>
-  <div class="menu" id="menu"></div>
+  <div id="drink-list"></div>
 
-<script>
-const drinks = [
-  {
-    name: { pl: "Blue Lagoon", en: "Blue Lagoon" },
-    ingredients: { pl: ["Gin", "Syrop Blue Curacao", "Woda gazowana"], en: ["Gin", "Blue Curacao Syrup", "Sparkling Water"] },
-    category: "gin"
-  },
-  {
-    name: { pl: "Irish Sunset", en: "Irish Sunset" },
-    ingredients: { pl: ["Irish Whiskey", "Syrop marakuja", "Sok ananasowy"], en: ["Irish Whiskey", "Passion Fruit Syrup", "Pineapple Juice"] },
-    category: "whiskey"
-  },
-  {
-    name: { pl: "Spiced Apricot", en: "Spiced Apricot" },
-    ingredients: { pl: ["Morelówka", "Spiced Rum", "Sok z czarnej porzeczki"], en: ["Apricot Vodka", "Spiced Rum", "Blackcurrant Juice"] },
-    category: "rum"
-  },
-  {
-    name: { pl: "Honey Caramel Cream", en: "Honey Caramel Cream" },
-    ingredients: { pl: ["Likier miodowy", "Likier słony karmel", "Sok z cytryny"], en: ["Honey Liqueur", "Salted Caramel Liqueur", "Lemon Juice"] },
-    category: "liqueur"
-  },
-  {
-    name: { pl: "Cherry Bourbon Smash", en: "Cherry Bourbon Smash" },
-    ingredients: { pl: ["Bourbon", "Wiśniówka", "Syrop malinowy"], en: ["Bourbon", "Cherry Vodka", "Raspberry Syrup"] },
-    category: "whiskey"
-  },
-  {
-    name: { pl: "Mint Julep", en: "Mint Julep" },
-    ingredients: { pl: ["Bourbon", "Sok z cytryny", "Świeża mięta"], en: ["Bourbon", "Lemon Juice", "Fresh Mint"] },
-    category: "whiskey"
-  },
-  {
-    name: { pl: "Cosmopolitan", en: "Cosmopolitan" },
-    ingredients: { pl: ["Wódka", "Triple Sec", "Syrop żurawinowy", "Sok z limonki"], en: ["Vodka", "Triple Sec", "Cranberry Syrup", "Lime Juice"] },
-    category: "vodka"
-  },
-  {
-    name: { pl: "Ginger Fresh", en: "Ginger Fresh" },
-    ingredients: { pl: ["Syrop imbirowy", "Sok z cytryny", "Woda gazowana", "Mięta", "Lód"], en: ["Ginger Syrup", "Lemon Juice", "Sparkling Water", "Mint", "Ice"] },
-    category: "nonalcoholic"
-  }
-];
-  {
-    name: { pl: "Blue Lagoon", en: "Blue Lagoon" },
-    ingredients: { pl: ["Gin", "Syrop Blue Curacao", "Woda gazowana"], en: ["Gin", "Blue Curacao Syrup", "Sparkling Water"] },
-    category: "vodka"
-  },
-  {
-    name: { pl: "Irish Sunset", en: "Irish Sunset" },
-    ingredients: { pl: ["Irish Whiskey", "Syrop marakuja", "Sok ananasowy"], en: ["Irish Whiskey", "Passion Fruit Syrup", "Pineapple Juice"] },
-    category: "whiskey"
-  },
-  {
-    name: { pl: "Ginger Fresh", en: "Ginger Fresh" },
-    ingredients: { pl: ["Syrop imbirowy", "Sok z cytryny", "Woda gazowana", "Mięta", "Lód"], en: ["Ginger Syrup", "Lemon Juice", "Sparkling Water", "Mint", "Ice"] },
-    category: "nonalcoholic"
-  }
-];
+  <script>
+    const drinks = [
+      {
+        name: { pl: "Blue Lagoon", en: "Blue Lagoon" },
+        ingredients: {
+          pl: ["Gin", "Syrop Blue Curacao", "Woda gazowana"],
+          en: ["Gin", "Blue Curacao Syrup", "Sparkling Water"]
+        },
+        category: "gin"
+      },
+      {
+        name: { pl: "Irish Sunset", en: "Irish Sunset" },
+        ingredients: {
+          pl: ["Irish Whiskey", "Syrop marakuja", "Sok ananasowy"],
+          en: ["Irish Whiskey", "Passion Fruit Syrup", "Pineapple Juice"]
+        },
+        category: "whiskey"
+      },
+      {
+        name: { pl: "Spiced Apricot", en: "Spiced Apricot" },
+        ingredients: {
+          pl: ["Morelówka", "Spiced Rum", "Sok z czarnej porzeczki"],
+          en: ["Apricot Vodka", "Spiced Rum", "Blackcurrant Juice"]
+        },
+        category: "rum"
+      },
+      {
+        name: { pl: "Ginger Fresh", en: "Ginger Fresh" },
+        ingredients: {
+          pl: ["Syrop imbirowy", "Sok z cytryny", "Woda gazowana", "Mięta", "Lód"],
+          en: ["Ginger Syrup", "Lemon Juice", "Sparkling Water", "Mint", "Ice"]
+        },
+        category: "nonalcoholic"
+      }
+    ];
 
-let currentLang = "pl";
-let currentCategory = "all";
+    let currentLang = 'pl';
+    let currentCategory = 'all';
 
-function setLanguage(lang) {
-  currentLang = lang;
-  document.getElementById("title").innerText = lang === "pl" ? "Menu drinków" : "Drink Menu";
-  renderMenu();
-}
-function setCategory(cat) {
-  currentCategory = cat;
-  renderMenu();
-}
-function renderMenu() {
-  const container = document.getElementById("menu");
-  container.innerHTML = "";
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.getElementById("title").innerText = lang === 'pl' ? 'Menu drinków' : 'Drinks Menu';
+      renderDrinks();
+    }
 
-  drinks
-    .filter(d => currentCategory === "all" || d.category === currentCategory)
-    .forEach(d => {
-      const div = document.createElement("div");
-      div.className = "drink";
+    function filterCategory(cat) {
+      currentCategory = cat;
+      renderDrinks();
+    }
 
-      const name = document.createElement("div");
-      name.className = "drink-name";
-      name.innerText = d.name[currentLang];
+    function renderDrinks() {
+      const list = document.getElementById("drink-list");
+      list.innerHTML = "";
+      drinks
+        .filter(d => currentCategory === 'all' || d.category === currentCategory)
+        .forEach(drink => {
+          const div = document.createElement("div");
+          div.className = "drink";
+          div.innerHTML = `
+            <h2>${drink.name[currentLang]}</h2>
+            ${drink.ingredients[currentLang].map(i => `<p>${i}</p>`).join("")}
+          `;
+          list.appendChild(div);
+        });
+    }
 
-      const list = document.createElement("div");
-      list.className = "drink-ingredients";
-      list.innerHTML = d.ingredients[currentLang].join("<br>");
-
-      div.appendChild(name);
-      div.appendChild(list);
-      container.appendChild(div);
-    });
-}
-renderMenu();
-</script>
+    renderDrinks();
+  </script>
 </body>
 </html>
