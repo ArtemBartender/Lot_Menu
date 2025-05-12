@@ -135,29 +135,29 @@
     }
   </script>
 
-<script>
-  const categories = ["all", "vodka", "whiskey", "rum", "liqueur", "nonalcoholic"];
-  const categoryLabels = {
-    pl: {
-      all: "Wszystkie",
-      vodka: "Wódka",
-      whiskey: "Whiskey & Bourbon",
-      rum: "Rum",
-      liqueur: "Likier",
-      nonalcoholic: "Bezalkoholowe"
-    },
-    en: {
-      all: "All",
-      vodka: "Vodka",
-      whiskey: "Whiskey & Bourbon",
-      rum: "Rum",
-      liqueur: "Liqueur",
-      nonalcoholic: "Non-alcoholic"
-    }
-  };
+    <script>
+      const categories = ["all", "vodka", "whiskey", "rum", "liqueur", "nonalcoholic"];
+      const categoryLabels = {
+        pl: {
+          all: "Wszystkie",
+          vodka: "Wódka",
+          whiskey: "Whiskey & Bourbon",
+          rum: "Rum",
+          liqueur: "Likier",
+          nonalcoholic: "Bezalkoholowe"
+        },
+        en: {
+          all: "All",
+          vodka: "Vodka",
+          whiskey: "Whiskey & Bourbon",
+          rum: "Rum",
+          liqueur: "Liqueur",
+          nonalcoholic: "Non-alcoholic"
+        }
+      };
 
-  const drinks = {
-    pl: [{name: "Blue Lagoon", ingredients: ["Gin", "Syrop Blue Curacao", "Woda gazowana"], category: "vodka"},
+      const drinks = {
+        pl: [{name: "Blue Lagoon", ingredients: ["Gin", "Syrop Blue Curacao", "Woda gazowana"], category: "vodka"},
 {name: "Irish Sunset", ingredients: ["Irish Whiskey", "Syrop marakuja", "Sok ananasowy"], category: "whiskey"},
 {name: "Spiced Apricot", ingredients: ["Morelówka", "Spiced Rum", "Sok z czarnej porzeczki"], category: "rum"},
 {name: "Honey Caramel Cream", ingredients: ["Likier miodowy", "Likier słony karmel", "Sok z cytryny"], category: "liqueur"},
@@ -187,7 +187,7 @@
 {name: "Passion Fruit Punch", ingredients: ["Syrop z marakui", "Sok pomarańczowy", "Woda sodowa", "Lód"], category: "nonalcoholic"},
 {name: "Pineapple Mint Splash", ingredients: ["Sok ananasowy", "Syrop miętowy", "Sok z cytryny", "Lód"], category: "nonalcoholic"},
 {name: "Mojito bezalkoholowe", ingredients: ["Smaki: truskawka, marakuja, bez, granat, pomarańcza, kokos, mango"], category: "nonalcoholic"}],
-    en: [{name: "Blue Lagoon", ingredients: ["Gin", "Syrop Blue Curacao", "Woda gazowana"], category: "vodka"},
+        en: [{name: "Blue Lagoon", ingredients: ["Gin", "Syrop Blue Curacao", "Woda gazowana"], category: "vodka"},
 {name: "Irish Sunset", ingredients: ["Irish Whiskey", "Syrop marakuja", "Sok ananasowy"], category: "whiskey"},
 {name: "Spiced Apricot", ingredients: ["Morelówka", "Spiced Rum", "Sok z czarnej porzeczki"], category: "rum"},
 {name: "Honey Caramel Cream", ingredients: ["Likier miodowy", "Likier słony karmel", "Sok z cytryny"], category: "liqueur"},
@@ -217,42 +217,42 @@
 {name: "Passion Fruit Punch", ingredients: ["Syrop z marakui", "Sok pomarańczowy", "Woda sodowa", "Lód"], category: "nonalcoholic"},
 {name: "Pineapple Mint Splash", ingredients: ["Sok ananasowy", "Syrop miętowy", "Sok z cytryny", "Lód"], category: "nonalcoholic"},
 {name: "Mojito bezalkoholowe", ingredients: ["Smaki: truskawka, marakuja, bez, granat, pomarańcza, kokos, mango"], category: "nonalcoholic"}]
-  };
+      };
 
-  function renderFilters(lang) {
-    const filterContainer = document.getElementById("filters");
-    filterContainer.innerHTML = "";
-    categories.forEach(cat => {
-      const btn = document.createElement("button");
-      btn.innerText = categoryLabels[lang][cat];
-      btn.onclick = () => renderMenu(lang, cat);
-      filterContainer.appendChild(btn);
-    });
-  }
+      function renderFilters(lang) {
+        const filterContainer = document.getElementById("filters");
+        filterContainer.innerHTML = "";
+        categories.forEach(cat => {
+          const btn = document.createElement("button");
+          btn.innerText = categoryLabels[lang][cat];
+          btn.onclick = () => renderMenu(lang, cat);
+          filterContainer.appendChild(btn);
+        });
+      }
 
-  function renderMenu(lang, filter) {
-    const container = document.getElementById("menu");
-    const title = document.getElementById("title");
-    title.innerText = lang === "pl" ? "Menu drinków" : "Cocktail Menu";
+      function renderMenu(lang, filter) {
+        const container = document.getElementById("menu");
+        const title = document.getElementById("title");
+        title.innerText = lang === "pl" ? "Menu drinków" : "Cocktail Menu";
 
-    const data = drinks[lang].filter(d => filter === "all" || d.category === filter);
-    container.innerHTML = data.map(drink => `
-      <div class="drink">
-        <h3>${drink.name}</h3>
-        <ul class="ingredients">
-          ${drink.ingredients.map(i => `<li>${i}</li>`).join("")}
-        </ul>
-      </div>
-    `).join("");
-  }
+        const data = drinks[lang].filter(d => filter === "all" || d.category === filter);
+        container.innerHTML = data.map(drink => `
+          <div class="drink">
+            <h3>${drink.name}</h3>
+            <ul class="ingredients">
+              ${drink.ingredients.map(i => `<li>${i}</li>`).join("")}
+            </ul>
+          </div>
+        `).join("");
+      }
 
-  function setLanguage(lang) {
-    renderFilters(lang);
-    renderMenu(lang, "all");
-  }
+      function setLanguage(lang) {
+        renderFilters(lang);
+        renderMenu(lang, "all");
+      }
 
-  setLanguage("pl");
-</script>
-</body>
-</html>
-
+      setLanguage("pl");
+    </script>
+    </body>
+    </html>
+    
