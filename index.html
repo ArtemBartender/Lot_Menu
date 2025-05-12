@@ -68,6 +68,7 @@
   </header>
 
   <div class="language-switch">
+<hr style="margin: 0 20px 1rem; border: 0; height: 1px; background: #fcbf49;" />
     <button onclick="setLanguage('pl')">PL</button>
     <button onclick="setLanguage('en')">EN</button>
   </div>
@@ -108,7 +109,7 @@
       categories.forEach(cat => {
         const btn = document.createElement("button");
         btn.innerText = categoryLabels[lang][cat];
-        btn.onclick = () => renderMenu(lang, cat);
+        btn.addEventListener('click', () => renderMenu(lang, cat));
         filterContainer.appendChild(btn);
       });
     }
