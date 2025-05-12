@@ -67,8 +67,8 @@
     <h1 id="title">Menu drinków</h1>
   </header>
 
-  <div class="language-switch">
-<hr style="margin: 0 20px 1rem; border: 0; height: 1px; background: #fcbf49;" />
+  <hr style="margin: 0 20px 1rem; border: 0; height: 1px; background: #fcbf49;" />
+<div class="language-switch">
     <button onclick="setLanguage('pl')">PL</button>
     <button onclick="setLanguage('en')">EN</button>
   </div>
@@ -109,7 +109,9 @@
       categories.forEach(cat => {
         const btn = document.createElement("button");
         btn.innerText = categoryLabels[lang][cat];
-        btn.addEventListener('click', () => renderMenu(lang, cat));
+        
+    btn.addEventListener('click', () => renderMenu(lang, cat));
+    
         filterContainer.appendChild(btn);
       });
     }
@@ -130,15 +132,13 @@
       `).join("");
     }
 
+    
     function setLanguage(lang) {
+      currentLang = lang;
+    
       renderFilters(lang);
       renderMenu(lang, "all");
     }
   </script>
-
-  <script>
-    setLanguage("pl");
-  </script>
 </body>
 </html>
-
