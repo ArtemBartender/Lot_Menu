@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -7,162 +6,126 @@
   <title>Menu drinków</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #1d3557 20%, #003049 100%);
-      color: #fcbf49;
       margin: 0;
-      padding: 0;
-    }
-    header {
-      background-color: #1d3557;
-      color: #fcbf49;
-      padding: 1rem;
+      font-family: sans-serif;
+      background: linear-gradient(to bottom right, #0b1c3d, #182d45);
+      color: #f2c76e;
       text-align: center;
     }
-    .language-switch, .filter-buttons {
-      text-align: center;
-      margin: 1rem;
+    h1 { margin-top: 30px; font-size: 2em; }
+    .lang-switch, .category-switch {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 20px 0;
+      gap: 10px;
     }
-    .language-switch button, .filter-buttons button {
-      margin: 5px 8px;
-      padding: 8px 18px;
-      font-weight: bold;
-      background-color: #fcbf49;
+    .lang-switch button, .category-switch button {
       border: none;
-      color: #1d3557;
+      border-radius: 999px;
+      padding: 10px 20px;
+      background: #a26d28;
+      color: white;
+      font-weight: bold;
       cursor: pointer;
-      border-radius: 50px;
-      font-size: 1rem;
     }
-    .section {
-      padding: 1rem 2rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
+    .divider {
+      height: 2px;
+      background-color: #a26d28;
+      margin: 10px auto;
+      width: 90%;
     }
+    .menu { display: flex; flex-direction: column; align-items: center; gap: 25px; padding-bottom: 50px; }
     .drink {
-      text-align: center;
+      max-width: 90%;
+      background-color: rgba(255,255,255,0.05);
+      border-radius: 15px;
+      padding: 15px;
     }
-    .drink h3 {
-      margin-bottom: 0.3rem;
-      color: #ffffff;
+    .drink-name {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 8px;
     }
-    .ingredients {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-      font-size: 0.9rem;
-    }
-    .ingredients li {
-      margin: 3px 0;
-    }
-    @media screen and (max-width: 768px) {
-      .section {
-        grid-template-columns: 1fr;
-      }
+    .drink-ingredients {
+      font-size: 0.95em;
+      line-height: 1.4;
+      color: #f2c76e;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1 id="title">Menu drinków</h1>
-  </header>
-
-  <div class="language-switch">
+  <h1 id="title">Menu drinków</h1>
+  <div class="lang-switch">
     <button onclick="setLanguage('pl')">PL</button>
     <button onclick="setLanguage('en')">EN</button>
   </div>
-  <hr style="margin: 0 20px 1rem; border: 0; height: 1px; background: #fcbf49;" />
-  <div class="filter-buttons" id="filters"></div>
-  <main class="section" id="menu"></main>
+  <div class="divider"></div>
+  <div class="category-switch">
+    <button onclick="setCategory('all')">Wszystkie</button>
+    <button onclick="setCategory('vodka')">Wódka</button>
+    <button onclick="setCategory('whiskey')">Whiskey & Bourbon</button>
+    <button onclick="setCategory('rum')">Rum</button>
+    <button onclick="setCategory('liqueur')">Likier</button>
+    <button onclick="setCategory('nonalcoholic')">Bezalkoholowe</button>
+  </div>
+  <div class="menu" id="menu"></div>
 
-  <script>
-    const categories = ["all", "vodka", "whiskey", "rum", "liqueur", "nonalcoholic"];
-    const labels = {
-      pl: {
-        title: "Menu drinków",
-        categories: {
-          all: "Wszystkie",
-          vodka: "Wódka",
-          whiskey: "Whiskey & Bourbon",
-          rum: "Rum",
-          liqueur: "Likier",
-          nonalcoholic: "Bezalkoholowe"
-        }
-      },
-      en: {
-        title: "Cocktail Menu",
-        categories: {
-          all: "All",
-          vodka: "Vodka",
-          whiskey: "Whiskey & Bourbon",
-          rum: "Rum",
-          liqueur: "Liqueur",
-          nonalcoholic: "Non-alcoholic"
-        }
-      }
-    };
+<script>
+const drinks = [
+  {
+    name: { pl: "Blue Lagoon", en: "Blue Lagoon" },
+    ingredients: { pl: ["Gin", "Syrop Blue Curacao", "Woda gazowana"], en: ["Gin", "Blue Curacao Syrup", "Sparkling Water"] },
+    category: "vodka"
+  },
+  {
+    name: { pl: "Irish Sunset", en: "Irish Sunset" },
+    ingredients: { pl: ["Irish Whiskey", "Syrop marakuja", "Sok ananasowy"], en: ["Irish Whiskey", "Passion Fruit Syrup", "Pineapple Juice"] },
+    category: "whiskey"
+  },
+  {
+    name: { pl: "Ginger Fresh", en: "Ginger Fresh" },
+    ingredients: { pl: ["Syrop imbirowy", "Sok z cytryny", "Woda gazowana", "Mięta", "Lód"], en: ["Ginger Syrup", "Lemon Juice", "Sparkling Water", "Mint", "Ice"] },
+    category: "nonalcoholic"
+  }
+];
 
-    const drinks = {
-      pl: [
-        { name: "Blue Lagoon", ingredients: ["Gin", "Syrop Blue Curacao", "Woda gazowana"], category: "vodka" },
-        { name: "Irish Sunset", ingredients: ["Irish Whiskey", "Syrop marakuja", "Sok ananasowy"], category: "whiskey" },
-        { name: "Cosmopolitan", ingredients: ["Wódka", "Triple Sec", "Syrop żurawina", "Sok z limonki"], category: "vodka" },
-        { name: "Ginger Fresh", ingredients: ["Syrop imbirowy", "Sok z cytryny", "Woda gazowana", "Mięta", "Lód"], category: "nonalcoholic" }
-      ],
-      en: [
-        { name: "Blue Lagoon", ingredients: ["Gin", "Blue Curacao Syrup", "Sparkling water"], category: "vodka" },
-        { name: "Irish Sunset", ingredients: ["Irish Whiskey", "Passion fruit syrup", "Pineapple juice"], category: "whiskey" },
-        { name: "Cosmopolitan", ingredients: ["Vodka", "Triple Sec", "Cranberry syrup", "Lime juice"], category: "vodka" },
-        { name: "Ginger Fresh", ingredients: ["Ginger syrup", "Lemon juice", "Sparkling water", "Mint", "Ice"], category: "nonalcoholic" }
-      ]
-    };
-
-    let currentLang = "pl";
+let currentLang = "pl";
 let currentCategory = "all";
 
-    
-function setCategory(cat) {
-  currentCategory = cat;
-  renderMenu(currentLang, currentCategory);
-}
-
-function renderFilters(lang) {
-
-      const container = document.getElementById("filters");
-      container.innerHTML = "";
-      for (const cat of categories) {
-        const btn = document.createElement("button");
-        btn.innerText = labels[lang].categories[cat];
-        btn.setAttribute('onclick', `setCategory("${cat}")`);
-        container.appendChild(btn);
-      }
-    }
-
-    function renderMenu(lang, filter) {
-      document.getElementById("title").innerText = labels[lang].title;
-      const container = document.getElementById("menu");
-      const list = drinks[lang].filter(d => filter === "all" || d.category === filter);
-      container.innerHTML = list.map(drink => `
-        <div class="drink">
-          <h3>${drink.name}</h3>
-          <ul class="ingredients">${drink.ingredients.map(i => `<li>${i}</li>`).join("")}</ul>
-        </div>
-      `).join("");
-    }
-
-    
 function setLanguage(lang) {
   currentLang = lang;
-  renderFilters(lang);
-  renderMenu(lang, currentCategory);
+  document.getElementById("title").innerText = lang === "pl" ? "Menu drinków" : "Drink Menu";
+  renderMenu();
 }
-      currentLang = lang;
-      renderFilters(lang);
-      renderMenu(lang, "all");
-    }
+function setCategory(cat) {
+  currentCategory = cat;
+  renderMenu();
+}
+function renderMenu() {
+  const container = document.getElementById("menu");
+  container.innerHTML = "";
 
-    window.onload = () => setLanguage("pl");
-  </script>
+  drinks
+    .filter(d => currentCategory === "all" || d.category === currentCategory)
+    .forEach(d => {
+      const div = document.createElement("div");
+      div.className = "drink";
+
+      const name = document.createElement("div");
+      name.className = "drink-name";
+      name.innerText = d.name[currentLang];
+
+      const list = document.createElement("div");
+      list.className = "drink-ingredients";
+      list.innerHTML = d.ingredients[currentLang].join("<br>");
+
+      div.appendChild(name);
+      div.appendChild(list);
+      container.appendChild(div);
+    });
+}
+renderMenu();
+</script>
 </body>
 </html>
