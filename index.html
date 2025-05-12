@@ -58,18 +58,33 @@
     <button onclick="setLanguage('en')">EN</button>
   </div>
   <hr />
-  <div class="filter-group">
-    <button onclick="filterCategory('all')">Wszystkie</button>
-    <button onclick="filterCategory('vodka')">Wódka</button>
-    <button onclick="filterCategory('whiskey')">Whiskey & Bourbon</button>
-    <button onclick="filterCategory('rum')">Rum</button>
-    <button onclick="filterCategory('liqueur')">Likier</button>
-    <button onclick="filterCategory('nonalcoholic')">Bezalcoholowe</button>
-    <button onclick="filterCategory('gin')">Gin</button>
+  <div class="filter-group" id="filter-group">
+    <!-- Will be dynamically inserted -->
   </div>
   <div id="drink-list"></div>
 
   <script>
+    const categoryLabels = {
+      pl: {
+        all: "Wszystkie",
+        vodka: "Wódka",
+        whiskey: "Whiskey & Bourbon",
+        rum: "Rum",
+        liqueur: "Likier",
+        nonalcoholic: "Bezalcoholowe",
+        gin: "Gin"
+      },
+      en: {
+        all: "All",
+        vodka: "Vodka",
+        whiskey: "Whiskey & Bourbon",
+        rum: "Rum",
+        liqueur: "Liqueur",
+        nonalcoholic: "Non-alcoholic",
+        gin: "Gin"
+      }
+    };
+
     const drinks = [
       {
         name: { pl: "Blue Lagoon", en: "Blue Lagoon" },
@@ -102,6 +117,22 @@
           en: ["Ginger Syrup", "Lemon Juice", "Sparkling Water", "Mint", "Ice"]
         },
         category: "nonalcoholic"
+      },
+      {
+        name: { pl: "Berry Boost", en: "Berry Boost" },
+        ingredients: {
+          pl: ["Syrop malinowy", "Sok żurawinowy", "Sok z cytryny", "Woda gazowana", "Lód"],
+          en: ["Raspberry Syrup", "Cranberry Juice", "Lemon Juice", "Sparkling Water", "Ice"]
+        },
+        category: "nonalcoholic"
+      },
+      {
+        name: { pl: "Pomegranate Sparkle", en: "Pomegranate Sparkle" },
+        ingredients: {
+          pl: ["Syrop z granatu", "Sok z cytryny", "Woda gazowana", "Lód"],
+          en: ["Pomegranate Syrup", "Lemon Juice", "Sparkling Water", "Ice"]
+        },
+        category: "nonalcoholic"
       }
     ];
 
@@ -111,7 +142,19 @@
     function setLanguage(lang) {
       currentLang = lang;
       document.getElementById("title").innerText = lang === 'pl' ? 'Menu drinków' : 'Drinks Menu';
+      updateFilters();
       renderDrinks();
+    }
+
+    function updateFilters() {
+      const filterGroup = document.getElementById("filter-group");
+      filterGroup.innerHTML = '';
+      Object.entries(categoryLabels[currentLang]).forEach(([key, label]) => {
+        const btn = document.createElement("button");
+        btn.innerText = label;
+        btn.onclick = () => filterCategory(key);
+        filterGroup.appendChild(btn);
+      });
     }
 
     function filterCategory(cat) {
@@ -135,7 +178,7 @@
         });
     }
 
-    renderDrinks();
+    setLanguage(currentLang);
   </script>
 </body>
 </html>
