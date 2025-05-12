@@ -1,8 +1,9 @@
+<script>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Menu LOT</title>
   <style>
     body {
@@ -18,13 +19,13 @@
       padding: 1rem;
       text-align: center;
     }
-    .language-switch {
+    .language-switch, .filter-buttons {
       text-align: center;
-      margin-top: 1rem;
+      margin: 1rem;
     }
-    .language-switch button {
-      margin: 0 10px;
-      padding: 8px 20px;
+    .language-switch button, .filter-buttons button {
+      margin: 5px 8px;
+      padding: 8px 18px;
       font-weight: bold;
       background-color: #fcbf49;
       border: none;
@@ -34,17 +35,16 @@
       font-size: 1rem;
     }
     .section {
-      padding: 2rem;
+      padding: 1rem 2rem;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 2rem;
     }
     .drink {
-      margin-bottom: 2rem;
       text-align: center;
     }
     .drink h3 {
-      margin: 0 0 0.5rem 0;
+      margin-bottom: 0.3rem;
       color: #ffffff;
     }
     .ingredients {
@@ -73,68 +73,105 @@
     <button onclick="setLanguage('en')">EN</button>
   </div>
 
+  <div class="filter-buttons" id="filters"></div>
+
   <main class="section" id="menu"></main>
 
   <script>
-    const drinks = {
-      pl: `<div class='drink'><h3>Blue Lagoon</h3><ul class='ingredients'><li>Gin</li><li>Syrop Blue Curacao</li><li>Woda gazowana</li></ul></div>
-<div class='drink'><h3>Irish Sunset</h3><ul class='ingredients'><li>Irish Whiskey</li><li>Syrop marakuja</li><li>Sok ananasowy</li></ul></div>
-<div class='drink'><h3>Spiced Apricot</h3><ul class='ingredients'><li>Morelówka</li><li>Spiced Rum</li><li>Sok z czarnej porzeczki</li></ul></div>
-<div class='drink'><h3>Honey Caramel Cream</h3><ul class='ingredients'><li>Likier miodowy</li><li>Likier słony karmel</li><li>Sok z cytryny</li></ul></div>
-<div class='drink'><h3>Cherry Bourbon Smash</h3><ul class='ingredients'><li>Wiśniówka</li><li>Syrop malinowy</li></ul></div>
-<div class='drink'><h3>Mint Julep</h3><ul class='ingredients'><li>Bourbon</li><li>Sok z cytryny</li><li>Świeża mięta</li></ul></div>
-<div class='drink'><h3>Spiced Orange Old Fashioned</h3><ul class='ingredients'><li>Rum</li><li>Syrop marakuja</li><li>Sok pomarańczowy</li></ul></div>
-<div class='drink'><h3>Cosmopolitan</h3><ul class='ingredients'><li>Wódka</li><li>Triple Sec</li><li>Syrop żurawinowy</li><li>Sok z limonki</li></ul></div>
-<div class='drink'><h3>French 75</h3><ul class='ingredients'><li>Gin</li><li>Sok z cytryny</li><li>Syrop cukrowy</li><li>Wino musujące</li></ul></div>
-<div class='drink'><h3>Tom Collins</h3><ul class='ingredients'><li>Gin</li><li>Sok z cytryny</li><li>Syrop cukrowy</li><li>Woda gazowana</li></ul></div>
-<div class='drink'><h3>Pina Colada</h3><ul class='ingredients'><li>Rum</li><li>Syrop kokosowy</li><li>Sok ananasowy</li></ul></div>
-<div class='drink'><h3>Daiquiri</h3><ul class='ingredients'><li>Rum</li><li>Syrop cukrowy</li><li>Sok z limonki</li></ul></div>
-<div class='drink'><h3>Cranberry Bliss</h3><ul class='ingredients'><li>Gin</li><li>Syrop grenadyna</li><li>Syrop żurawinowy</li><li>Tonik</li></ul></div>
-<div class='drink'><h3>Passion Ginger Martini</h3><ul class='ingredients'><li>Gin</li><li>Syrop imbirowy</li><li>Syrop marakuja</li><li>Sok z limonki</li></ul></div>
-<div class='drink'><h3>Tropical Punch</h3><ul class='ingredients'><li>Rum</li><li>Sok ananasowy</li><li>Sok pomarańczowy</li><li>Syrop marakuja</li></ul></div>
-<div class='drink'><h3>Pornstar Martini</h3><ul class='ingredients'><li>Wódka</li><li>Syrop waniliowy</li><li>Syrop marakuja</li><li>Sok z limonki</li><li>Prosecco (shot)</li></ul></div>
-<div class='drink'><h3>Mazurek</h3><ul class='ingredients'><li>Morelówka</li><li>Sok z cytryny</li><li>Syrop marakuja</li><li>Tonic</li></ul></div>
-<div class='drink'><h3>Polonez</h3><ul class='ingredients'><li>Gin</li><li>Sok z cytryny</li><li>Syrop żurawinowy</li><li>Sprite lub tonic</li></ul></div>
-<div class='drink'><h3>Bushmills Blue Orange Whiskey Sour</h3><ul class='ingredients'><li>Bushmills Original</li><li>Blue Curacao</li><li>Syrop cukrowy</li><li>Sok z cytryny</li></ul></div>
-<div class='drink'><h3>The Curious Jackalope</h3><ul class='ingredients'><li>Gunpowder Irish Gin</li><li>Sok z limonki</li><li>Sok grejpfrutowy</li><li>Syrop cukrowy</li></ul></div>
-<div class='drink'><h3>Old Fashioned</h3><ul class='ingredients'><li>Old Virginia Bourbon</li><li>Syrop cukrowy</li><li>Angostura bitters</li></ul></div>
-<div class='drink'><h3>Irishman</h3><ul class='ingredients'><li>Carolans Irish Cream</li><li>Bushmills Original</li></ul></div>
-<div class='drink'><h3>Gold Rush</h3><ul class='ingredients'><li>Bushmills Original</li><li>Krupnik Old Liqueur</li><li>Sok z cytryny</li></ul></div>
-<div class='drink'><h3>Old Virginia Manhattan</h3><ul class='ingredients'><li>Old Virginia</li><li>Martini Bianco</li><li>Angostura bitters</li></ul></div>
-`,
-      en: `<div class='drink'><h3>Blue Lagoon</h3><ul class='ingredients'><li>Gin</li><li>Blue Curacao syrup</li><li>Sparkling water</li></ul></div>
-<div class='drink'><h3>Irish Sunset</h3><ul class='ingredients'><li>Irish Whiskey</li><li>Passion fruit syrup</li><li>Pineapple juice</li></ul></div>
-<div class='drink'><h3>Spiced Apricot</h3><ul class='ingredients'><li>Apricot vodka</li><li>Spiced Rum</li><li>Blackcurrant juice</li></ul></div>
-<div class='drink'><h3>Honey Caramel Cream</h3><ul class='ingredients'><li>Honey liqueur</li><li>Salted caramel liqueur</li><li>Lemon juice</li></ul></div>
-<div class='drink'><h3>Cherry Bourbon Smash</h3><ul class='ingredients'><li>Cherry vodka</li><li>Raspberry syrup</li></ul></div>
-<div class='drink'><h3>Mint Julep</h3><ul class='ingredients'><li>Bourbon</li><li>Lemon juice</li><li>Fresh mint</li></ul></div>
-<div class='drink'><h3>Spiced Orange Old Fashioned</h3><ul class='ingredients'><li>Rum</li><li>Passion fruit syrup</li><li>Orange juice</li></ul></div>
-<div class='drink'><h3>Cosmopolitan</h3><ul class='ingredients'><li>Vodka</li><li>Triple Sec</li><li>Cranberry syrup</li><li>Lime juice</li></ul></div>
-<div class='drink'><h3>French 75</h3><ul class='ingredients'><li>Gin</li><li>Lemon juice</li><li>Sugar syrup</li><li>Sparkling wine</li></ul></div>
-<div class='drink'><h3>Tom Collins</h3><ul class='ingredients'><li>Gin</li><li>Lemon juice</li><li>Sugar syrup</li><li>Sparkling water</li></ul></div>
-<div class='drink'><h3>Pina Colada</h3><ul class='ingredients'><li>Rum</li><li>Coconut syrup</li><li>Pineapple juice</li></ul></div>
-<div class='drink'><h3>Daiquiri</h3><ul class='ingredients'><li>Rum</li><li>Sugar syrup</li><li>Lime juice</li></ul></div>
-<div class='drink'><h3>Cranberry Bliss</h3><ul class='ingredients'><li>Gin</li><li>Grenadine</li><li>Cranberry syrup</li><li>Tonic</li></ul></div>
-<div class='drink'><h3>Passion Ginger Martini</h3><ul class='ingredients'><li>Gin</li><li>Ginger syrup</li><li>Passion fruit syrup</li><li>Lime juice</li></ul></div>
-<div class='drink'><h3>Tropical Punch</h3><ul class='ingredients'><li>Rum</li><li>Pineapple juice</li><li>Orange juice</li><li>Passion fruit syrup</li></ul></div>
-<div class='drink'><h3>Pornstar Martini</h3><ul class='ingredients'><li>Vodka</li><li>Vanilla syrup</li><li>Passion fruit syrup</li><li>Lime juice</li><li>Prosecco shot</li></ul></div>
-<div class='drink'><h3>Mazurek</h3><ul class='ingredients'><li>Apricot vodka</li><li>Lemon juice</li><li>Passion fruit syrup</li><li>Tonic</li></ul></div>
-<div class='drink'><h3>Polonez</h3><ul class='ingredients'><li>Gin</li><li>Lemon juice</li><li>Cranberry syrup</li><li>Sprite or tonic</li></ul></div>
-<div class='drink'><h3>Bushmills Blue Orange Whiskey Sour</h3><ul class='ingredients'><li>Bushmills Original</li><li>Blue Curacao</li><li>Sugar syrup</li><li>Lemon juice</li></ul></div>
-<div class='drink'><h3>The Curious Jackalope</h3><ul class='ingredients'><li>Gunpowder Irish Gin</li><li>Lime juice</li><li>Grapefruit juice</li><li>Sugar syrup</li></ul></div>
-<div class='drink'><h3>Old Fashioned</h3><ul class='ingredients'><li>Old Virginia Bourbon</li><li>Sugar syrup</li><li>Angostura bitters</li></ul></div>
-<div class='drink'><h3>Irishman</h3><ul class='ingredients'><li>Carolans Irish Cream</li><li>Bushmills Original</li></ul></div>
-<div class='drink'><h3>Gold Rush</h3><ul class='ingredients'><li>Bushmills Original</li><li>Krupnik Old Liqueur</li><li>Lemon juice</li></ul></div>
-<div class='drink'><h3>Old Virginia Manhattan</h3><ul class='ingredients'><li>Old Virginia</li><li>Martini Bianco</li><li>Angostura bitters</li></ul></div>
-`
+    const categories = ["all", "vodka", "whiskey", "rum", "liqueur", "nonalcoholic"];
+    const categoryLabels = {
+      pl: {
+        all: "Wszystkie",
+        vodka: "Wódka",
+        whiskey: "Whiskey & Bourbon",
+        rum: "Rum",
+        liqueur: "Likier",
+        nonalcoholic: "Bezalkoholowe"
+      },
+      en: {
+        all: "All",
+        vodka: "Vodka",
+        whiskey: "Whiskey & Bourbon",
+        rum: "Rum",
+        liqueur: "Liqueur",
+        nonalcoholic: "Non-alcoholic"
+      }
     };
 
-    function setLanguage(lang) {
-      document.getElementById("menu").innerHTML = drinks[lang];
-      document.getElementById("title").innerText = lang === "pl" ? "Menu drinków" : "Cocktail Menu";
+    const drinks = {
+      pl: [],
+      en: []
+    };
+
+    function renderFilters(lang) {
+      const filterContainer = document.getElementById("filters");
+      filterContainer.innerHTML = "";
+      categories.forEach(cat => {
+        const btn = document.createElement("button");
+        btn.innerText = categoryLabels[lang][cat];
+        btn.onclick = () => renderMenu(lang, cat);
+        filterContainer.appendChild(btn);
+      });
     }
 
-    setLanguage('pl');
+    function renderMenu(lang, filter) {
+      const container = document.getElementById("menu");
+      const title = document.getElementById("title");
+      title.innerText = lang === "pl" ? "Menu drinków" : "Cocktail Menu";
+
+      const data = drinks[lang].filter(d => filter === "all" || d.category === filter);
+      container.innerHTML = data.map(drink => `
+        <div class="drink">
+          <h3>${drink.name}</h3>
+          <ul class="ingredients">
+            ${drink.ingredients.map(i => `<li>${i}</li>`).join("")}
+          </ul>
+        </div>
+      `).join("");
+    }
+
+    function setLanguage(lang) {
+      renderFilters(lang);
+      renderMenu(lang, "all");
+    }
   </script>
+</body>
+</html>
+
+drinks.pl = [
+{name: "Blue Lagoon", ingredients: ['Gin', 'Syrop Blue Curacao', 'Woda gazowana'], category: "vodka"},
+{name: "Irish Sunset", ingredients: ['Irish Whiskey', 'Syrop marakuja', 'Sok ananasowy'], category: "whiskey"},
+{name: "Spiced Apricot", ingredients: ['Morelówka', 'Spiced Rum', 'Sok z czarnej porzeczki'], category: "rum"},
+{name: "Honey Caramel Cream", ingredients: ['Likier miodowy', 'Likier słony karmel', 'Sok z cytryny'], category: "liqueur"},
+{name: "Cherry Bourbon Smash", ingredients: ['Wiśniówka', 'Syrop malinowy'], category: "vodka"},
+{name: "Mint Julep", ingredients: ['Bourbon', 'Sok z cytryny', 'Świeża mięta'], category: "whiskey"},
+{name: "Spiced Orange Old Fashioned", ingredients: ['Rum', 'Syrop marakuja', 'Sok pomarańczowy'], category: "rum"},
+{name: "Cosmopolitan", ingredients: ['Wódka', 'Triple Sec', 'Syrop żurawinowy', 'Sok z limonki'], category: "vodka"},
+{name: "French 75", ingredients: ['Gin', 'Sok z cytryny', 'Syrop cukrowy', 'Wino musujące'], category: "liqueur"},
+{name: "Tom Collins", ingredients: ['Gin', 'Sok z cytryny', 'Syrop cukrowy', 'Woda gazowana'], category: "liqueur"},
+{name: "Pina Colada", ingredients: ['Rum', 'Syrop kokosowy', 'Sok ananasowy'], category: "rum"},
+{name: "Daiquiri", ingredients: ['Rum', 'Syrop cukrowy', 'Sok z limonki'], category: "rum"},
+{name: "Cranberry Bliss", ingredients: ['Gin', 'Syrop grenadyna', 'Syrop żurawinowy', 'Tonik'], category: "liqueur"},
+{name: "Passion Ginger Martini", ingredients: ['Gin', 'Syrop imbirowy', 'Syrop marakuja', 'Sok z limonki'], category: "liqueur"},
+{name: "Tropical Punch", ingredients: ['Rum', 'Sok ananasowy', 'Sok pomarańczowy', 'Syrop marakuja'], category: "rum"},
+{name: "Pornstar Martini", ingredients: ['Wódka', 'Syrop waniliowy', 'Syrop marakuja', 'Sok z limonki', 'Prosecco'], category: "vodka"},
+{name: "Mazurek", ingredients: ['Morelówka', 'Sok z cytryny', 'Syrop marakuja', 'Tonic'], category: "rum"},
+{name: "Polonez", ingredients: ['Gin', 'Sok z cytryny', 'Syrop żurawinowy', 'Sprite lub tonic'], category: "liqueur"},
+{name: "Bushmills Blue Orange Whiskey Sour", ingredients: ['Bushmills', 'Blue Curacao', 'Syrop cukrowy', 'Sok z cytryny'], category: "whiskey"},
+{name: "The Curious Jackalope", ingredients: ['Gin', 'Sok z limonki', 'Sok grejpfrutowy', 'Syrop cukrowy'], category: "liqueur"},
+{name: "Old Fashioned", ingredients: ['Old Virginia Bourbon', 'Syrop cukrowy', 'Angostura bitters'], category: "whiskey"},
+{name: "Irishman", ingredients: ['Carolans', 'Bushmills'], category: "whiskey"},
+{name: "Gold Rush", ingredients: ['Bushmills', 'Krupnik Old Liqueur', 'Sok z cytryny'], category: "whiskey"},
+{name: "Old Virginia Manhattan", ingredients: ['Old Virginia', 'Martini Bianco', 'Angostura bitters'], category: "whiskey"},
+{name: "Ginger Fresh", ingredients: ['Syrop imbirowy', 'Sok z cytryny', 'Woda gazowana', 'Mięta', 'Lód'], category: "nonalcoholic"},
+{name: "Berry Boost", ingredients: ['Syrop malinowy', 'Sok żurawinowy', 'Sok z cytryny', 'Woda gazowana', 'Lód'], category: "nonalcoholic"},
+{name: "Pomegranate Sparkle", ingredients: ['Syrop z granatu', 'Sok z cytryny', 'Woda gazowana', 'Lód'], category: "nonalcoholic"},
+{name: "Passion Fruit Punch", ingredients: ['Syrop z marakui', 'Sok pomarańczowy', 'Woda sodowa', 'Lód'], category: "nonalcoholic"},
+{name: "Pineapple Mint Splash", ingredients: ['Sok ananasowy', 'Syrop miętowy', 'Sok z cytryny', 'Lód'], category: "nonalcoholic"},
+{name: "Mojito bezalkoholowe", ingredients: ['Smaki: truskawka, marakuja, bez, granat, pomarańcza, kokos, mango'], category: "nonalcoholic"}
+];
+drinks.en = drinks.pl;  // можно продублировать на английском позже
+setLanguage('pl');
+</script>
 </body>
 </html>
