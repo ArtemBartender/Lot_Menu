@@ -1,35 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
 body {
-  font-family: Calibri, sans-serif;
-  background: linear-gradient(to bottom, #001f4d, #003366);
-  color: white;
+  position: relative;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #003366;
+  color: #f0ffff;
   text-align: center;
   margin: 0;
   padding: 0;
+  z-index: 0;
 }
-.container {
-  padding: 20px;
-}
-.language-switch button,
-.category-switch button {
-  background-color: #a86a3d;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  padding: 10px 20px;
-  margin: 5px;
-  font-size: 16px;
+
+.header-logo-link {
+  display: inline-block;
   cursor: pointer;
+} 
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: url('icons/LOT_Tło_4.jpg') center/cover no-repeat;
+  filter: blur(8px);
+  transform: scale(1.05);
+  z-index: -1;
 }
+
+.site-header {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 60px;
+  /* сначала полупрозрачный чёрный, затем картинка */
+  background: 
+    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    url('icons/LOT_Tło_4.png') center top/cover fixed;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 16px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.22);
+  z-index: 1000;
+}
+
+/* По умолчанию */
+.site-header .header-logo {
+  height: 40px;
+  width: auto;
+  margin-right: 16px;
+}
+
+/* На экранах до 600px ширины — уменьшаем логотип */
+@media only screen and (max-width: 600px) {
+  .site-header .header-logo {
+    height: 28px !important;
+    margin-right: 8px !important;
+  }
+}
+.site-header h2 {
+  margin: 0; color: white; font-size: 1.25rem; font-weight: 600;
+}
+
+.language-switch {
+  display: flex; align-items: center; gap: 10px;
+  margin-right: 40px; position: relative; top: 4px;
+}
+
+.language-switch button {
+  background: transparent; border: none; padding: 4px; cursor: pointer;
+}
+.flag-icon { height: 24px; width: auto; }
+
+.container {
+  padding: 80px 20px 20px;
+}
+
+.category-switch button {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #2A2D64; color: white;
+  border: none; border-radius: 20px;
+  padding: 10px 20px; margin: 5px;
+  font-size: 16px; cursor: pointer;
+}
+
 .cocktail-card {
-  background-color: rgba(255, 255, 255, 0.05);
+  width: 80%; max-width: 500px;
   margin: 20px auto;
-  padding: 15px;
-  border-radius: 10px;
-  width: 80%;
-  max-width: 500px;
+  perspective: 1000px;
+  cursor: pointer;
+  transition: transform 0.2s;
 }
+.cocktail-card:hover {
+  transform: translateY(-4px);
+}
+
+.card-inner {
+  display: grid;
+  grid-template-areas: "frontback";
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+
+.cocktail-card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  grid-area: frontback;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  padding: 15px;
+  box-sizing: border-box;
+  background-color: rgba(42, 45, 100,0.15);
+}
+
+.card-front .cocktail-img {
+  display: none;
+}
+
+/* Изображение над названием
+.card-front {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cocktail-img {
+  width: 100px;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  object-fit: cover;
+}
+ */
+.card-back {
+  transform: rotateY(180deg);
+  background-color: rgba(42, 45, 100,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-style: italic;
+  color: #f0ffff;
+}
+
+.card-front h2 {
+  color: #f0ffff; /* например тёмно-синий */
+  margin: 0 0 10px;
+}
+
+/* Цвет текста ингредиентов */
+.card-front p {
+  color: #f0ffff; /* например насыщенный синий */
+  margin: 2px 0;
+}
+.surprise-btn {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #db620a;
+  color: white; border: none; border-radius: 20px;
+  padding: 10px 20px; margin: 10px 0 20px;
+  font-size: 16px; cursor: pointer;
+  transition: background-color .2s;
+}
+.surprise-btn:hover {
+  background-color: #8b5831;
+}
+
 footer {
   margin-top: 40px;
-  font-size: 14px;
-  color: #ffc;
+  font-size: 16px;
+  color: #f0ffff;
 }
