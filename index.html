@@ -4,7 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B9TLTDS3W2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'G-B9TLTDS3W2');
+</script>
+
+  
   <title>Menu Koktajli LOT</title>
 
   <link rel="stylesheet" href="style.css" />
@@ -16,11 +27,20 @@
 </head>
 <body>
 
+  <!-- ========== Age-gate overlay ========== 
+  <div id="age-modal" class="age-modal">
+    <div class="age-modal__content">
+      <p>Czy masz ukończone 18 lat?</p>
+      <button id="age-yes">Tak</button>
+      <button id="age-no">Nie</button>
+    </div>
+  </div>
+-->
   <!-- ========== Фиксированная шапка ========== -->
   <header class="site-header">
-  <a href="https://www.lot.com/pl/pl" class="header-logo-link">
-    <img src="icons/LOT_Logo_2.svg" alt="Logo LOT" class="header-logo">
-  </a>
+    <a href="https://www.lot.com/pl/pl" class="header-logo-link">
+      <img src="icons/LOT_Logo_2.svg" alt="Logo LOT" class="header-logo">
+    </a>
     <h2>Ważne, z kim podróżujesz</h2>
     <div class="language-switch">
       <button onclick="changeLanguage('pl')" aria-label="Polski">
@@ -50,7 +70,7 @@
   </div>
 
   <script src="cocktails.js"></script>
-  <script src="script.js"></script>
+ 
 
   <script>
     if ('serviceWorker' in navigator) {
@@ -59,6 +79,7 @@
         .then(() => console.log('SW registered'))
         .catch(err => console.error('SW failed:', err));
     }
+
     document.getElementById('footer-text').addEventListener('click', () => {
       window.open(
         'https://survey2.medallia.eu/?LotBusinessLounge&Salonik=0',
@@ -66,6 +87,26 @@
         'noopener'
       );
     });
+/*
+    // Age-gate logic
+    const ageModal = document.getElementById('age-modal');
+    const btnYes   = document.getElementById('age-yes');
+    const btnNo    = document.getElementById('age-no');
+
+    btnYes.addEventListener('click', () => {
+      ageModal.style.display = 'none';
+      changeLanguage(language);
+    });
+    btnNo.addEventListener('click', () => {
+      ageModal.style.display = 'none';
+      currentCategory = 'non_alcoholic';
+      changeLanguage(language);
+    });
+*/
+    window.addEventListener('load', () => {
+      ageModal.style.display = 'flex';
+    });
   </script>
+  <script src="script.js"></script>
 </body>
 </html>

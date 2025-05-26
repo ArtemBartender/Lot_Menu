@@ -3,7 +3,7 @@ let currentCategory = 'all';
 
 const translations = {
   pl: {
-    header:      "Ważne, z kim podróżujesz",
+    header:      "",
     title:       "Menu drinków",
     footer:      "Najlepszym podziękowaniem będzie Twoja opinia.",
     surprise:    "Zaskocz mnie koktajlem",
@@ -19,7 +19,7 @@ const translations = {
     }
   },
   en: {
-    header:      "It matters who you’re traveling with.",
+    header:      "",
     title:       "Cocktail Menu",
     footer:      "The best thank you is your opinion.",
     surprise:    "Surprise me a cocktail",
@@ -54,10 +54,12 @@ function renderCategories() {
   Object.entries(translations[language].categories).forEach(([key, label]) => {
     const btn = document.createElement("button");
     btn.textContent = label;
-    btn.onclick = () => {
+    if (key === currentCategory) btn.classList.add("active");
+    btn.addEventListener("click", () => {
       currentCategory = key;
+      renderCategories();
       renderCocktails();
-    };
+    });
     container.appendChild(btn);
   });
 }
@@ -77,50 +79,46 @@ function renderCocktails() {
     const inner = document.createElement("div");
     inner.className = "card-inner";
 
-    // — передняя сторона —
+    // Front
     const front = document.createElement("div");
     front.className = "card-front";
-
-    // картинка коктейля
-    //const img = document.createElement("img");
-    //img.src = c.image;
-    //img.alt = c.name[language];
-    //img.className = "cocktail-img";
-    //front.appendChild(img);
-
-    // название
     const nameEl = document.createElement("h2");
     nameEl.textContent = c.name[language];
     front.appendChild(nameEl);
-
-    // ингредиенты
     c.ingredients[language].forEach(ing => {
       const p = document.createElement("p");
       p.textContent = ing;
       front.appendChild(p);
     });
 
-    // — задняя сторона —
+    // Back
     const back = document.createElement("div");
     back.className = "card-back";
     const desc = document.createElement("p");
     desc.textContent = c.description[language];
     back.appendChild(desc);
 
-    // собираем
     inner.append(front, back);
     card.appendChild(inner);
     container.appendChild(card);
 
-    // клик — 3D-флип
     card.addEventListener("click", () => {
       card.classList.toggle("flipped");
+      // Track card flips
+      if (typeof gtag === 'function') {
+        gtag('event', 'flip_card', {
+          'event_category': 'engagement',
+          'event_label': c.name[language],
+          'transport_type': 'beacon'
+        });
+      }
     });
   });
 }
 
-// обработчик кнопки «Сюрприз»
-document.getElementById('surprise-btn').addEventListener('click', () => {
+// Surprise button handler
+const surpriseBtn = document.getElementById('surprise-btn');
+surpriseBtn.addEventListener('click', () => {
   const pool = cocktails.filter(c =>
     currentCategory === 'all' || c.category === currentCategory
   );
@@ -131,31 +129,20 @@ document.getElementById('surprise-btn').addEventListener('click', () => {
 
   const card = document.createElement("div");
   card.className = "cocktail-card";
-
   const inner = document.createElement("div");
   inner.className = "card-inner";
 
-  // front
   const front = document.createElement("div");
   front.className = "card-front";
-
-  const img = document.createElement("img");
-  img.src = pick.image;
-  img.alt = pick.name[language];
-  img.className = "cocktail-img";
-  front.appendChild(img);
-
   const nameEl = document.createElement("h2");
   nameEl.textContent = pick.name[language];
   front.appendChild(nameEl);
-
   pick.ingredients[language].forEach(ing => {
     const p = document.createElement("p");
     p.textContent = ing;
     front.appendChild(p);
   });
 
-  // back
   const back = document.createElement("div");
   back.className = "card-back";
   const desc = document.createElement("p");
@@ -168,13 +155,39 @@ document.getElementById('surprise-btn').addEventListener('click', () => {
 
   card.addEventListener("click", () => {
     card.classList.toggle("flipped");
+    if (typeof gtag === 'function') {
+      gtag('event', 'flip_card', {
+        'event_category': 'engagement',
+        'event_label': pick.name[language],
+        'transport_type': 'beacon'
+      });
+    }
   });
 
   card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  // Track surprise clicks
+  if (typeof gtag === 'function') {
+    gtag('event', 'click', {
+      'event_category': 'engagement',
+      'event_label': 'surprise_button',
+      'transport_type': 'beacon'
+    });
+  }
 });
 
-// инициализация при загрузке
-window.onload = () => changeLanguage(language);
+// Track all link clicks
+document.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    if (typeof gtag === 'function') {
+      gtag('event', 'click', {
+        'event_category': 'navigation',
+        'event_label': link.href,
+        'transport_type': 'beacon'
+      });
+    }
+  });
+});
 
-// инициализация при загрузке
+// Initialize on load
 window.onload = () => changeLanguage(language);

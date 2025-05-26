@@ -3,7 +3,7 @@
 body {
   position: relative;
   font-family: 'Montserrat', sans-serif;
-  background-color: #003366;
+  background-color: #413a31;
   color: #f0ffff;
   text-align: center;
   margin: 0;
@@ -11,40 +11,75 @@ body {
   z-index: 0;
 }
 
+.cocktail-card {
+  -webkit-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
+}
+
 .header-logo-link {
   display: inline-block;
   cursor: pointer;
-} 
+}
 
 body::before {
   content: "";
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: url('icons/LOT_Tło_4.jpg') center/cover no-repeat;
+  background: url('icons/LOT_Tlo_4.jpg') center/cover no-repeat;
   filter: blur(8px);
   transform: scale(1.05);
   z-index: -1;
 }
 
 .site-header {
-  position: fixed; top: 0; left: 0;
-  width: 100%; height: 60px;
-  /* сначала полупрозрачный чёрный, затем картинка */
-  background: 
-    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-    url('icons/LOT_Tło_4.png') center top/cover fixed;
-  display: flex; justify-content: space-between; align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* вместо width:100% ставим 100vw */
+  width: 100vw;
+  height: 60px;
+  /* ваш фон */
+  background:
+    linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
+  background-color: rgba(0, 0, 0, 0.4);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 0 16px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.22);
   z-index: 1000;
 }
-
 /* По умолчанию */
 .site-header .header-logo {
   height: 40px;
   width: auto;
   margin-right: 16px;
+}
+
+/* убираем фон у body, переезжаем на html */
+html {
+  /* здесь ваш фон */
+  background: url('icons/LOT_Tlo_4.jpg') center/cover fixed #003366;
+  /* чтобы ни один bounce не «пролезал» */
+  overscroll-behavior: none;
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background: none;
+  height: 100%;
+}
+
+/* контейнер, в котором будет реальный scroll */
+.scroll-container {
+  height: 100vh;            /* на всю высоту окна */
+  overflow-y: auto;         /* скроллим только его */
+  -webkit-overflow-scrolling: touch; /* плавный скролл на iOS */
+  overscroll-behavior: contain;      /* не даём контейнеру «выпрыгивать» */
 }
 
 /* На экранах до 600px ширины — уменьшаем логотип */
@@ -54,8 +89,12 @@ body::before {
     margin-right: 8px !important;
   }
 }
+
 .site-header h2 {
-  margin: 0; color: white; font-size: 1.25rem; font-weight: 600;
+  margin: 0;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 600;
 }
 
 .language-switch {
@@ -72,12 +111,27 @@ body::before {
   padding: 80px 20px 20px;
 }
 
+/* Стили для активной категории */
+.category-switch button.active {
+  background-color: #3d4d56;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
 .category-switch button {
   font-family: 'Montserrat', sans-serif;
-  background-color: #2A2D64; color: white;
-  border: none; border-radius: 20px;
-  padding: 10px 20px; margin: 5px;
-  font-size: 16px; cursor: pointer;
+  background-color: #041e42;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color .2s;
+}
+.category-switch button:hover {
+  background-color: #3d4d56;
 }
 
 .cocktail-card {
@@ -86,7 +140,14 @@ body::before {
   perspective: 1000px;
   cursor: pointer;
   transition: transform 0.2s;
+  touch-action: manipulation;
 }
+
+.cocktail-card:active {
+  transform: translateY(-2px) scale(0.98);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+} 
+
 .cocktail-card:hover {
   transform: translateY(-4px);
 }
@@ -116,21 +177,6 @@ body::before {
   display: none;
 }
 
-/* Изображение над названием
-.card-front {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.cocktail-img {
-  width: 100px;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  object-fit: cover;
-}
- */
 .card-back {
   transform: rotateY(180deg);
   background-color: rgba(42, 45, 100,0.15);
@@ -142,15 +188,15 @@ body::before {
 }
 
 .card-front h2 {
-  color: #f0ffff; /* например тёмно-синий */
+  color: #f0ffff;
   margin: 0 0 10px;
 }
 
-/* Цвет текста ингредиентов */
 .card-front p {
-  color: #f0ffff; /* например насыщенный синий */
+  color: #f0ffff;
   margin: 2px 0;
 }
+
 .surprise-btn {
   font-family: 'Montserrat', sans-serif;
   background-color: #db620a;
@@ -167,4 +213,8 @@ footer {
   margin-top: 40px;
   font-size: 16px;
   color: #f0ffff;
+}
+
+.header-logo {
+  filter: brightness(0) invert(1);
 }
