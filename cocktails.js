@@ -375,7 +375,7 @@ const cocktails = [
   {
     name: { pl: "Passion Fruit Punch", en: "Passion Fruit Punch" },
     ingredients: {
-      pl: ["Syrop z marakui", "Sok pomarańczowy", "Woda sodowa", "Lód"],
+      pl: ["Syrop z marakui", "Sok pomarańczowy", "Woda gazowana", "Lód"],
       en: ["Passion fruit syrup", "Orange juice", "Sparkling water", "Ice"]
     },
     category: "non_alcoholic",
