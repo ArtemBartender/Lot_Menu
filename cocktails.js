@@ -1,6 +1,6 @@
 const cocktails = [
   {
-    name: { pl: "Blue Orange Whiskey Sour", en: "Blue Orange Whiskey Sour" },
+    name: { pl: "1. Blue Orange Whiskey Sour", en: "1. Blue Orange Whiskey Sour" },
     ingredients: {
       pl: ["Whiskey", "Blue Curacao Syrop", "Syrop cukrowy", "Sok z cytryny"],
       en: ["Whiskey", "Blue Curacao Syrup", "Simple syrup", "Lemon juice"]
@@ -14,8 +14,8 @@ const cocktails = [
   },
     {
     name: { 
-      pl: "Gin & Tonic", 
-      en: "Gin & Tonic" 
+      pl: "2. Gin & Tonic", 
+      en: "2. Gin & Tonic" 
     },
     ingredients: {
       pl: ["Gin", "Tonik", "Plasterek limonki"],
@@ -29,7 +29,7 @@ const cocktails = [
     image: "drinks/gin-tonic.jpg"
   },
   {
-    name: { pl: "Blue Lagoon", en: "Blue Lagoon" },
+    name: { pl: "3. Blue Lagoon", en: "3. Blue Lagoon" },
     ingredients: {
       pl: ["Gin", "Blue Curacao Syrop", "Woda gazowana"],
       en: ["Gin", "Blue Curacao Syrup", "Sparkling water"]
@@ -41,7 +41,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Irish Sunset", en: "Irish Sunset" },
+    name: { pl: "4. Irish Sunset", en: "4. Irish Sunset" },
     ingredients: {
       pl: ["Whiskey", "Passion Fruit Syrup", "Sok Ananasowy"],
       en: ["Whiskey", "Passion Fruit Syrup", "Pineapple juice"]
@@ -53,7 +53,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Spiced Apricot", en: "Spiced Apricot" },
+    name: { pl: "5. Spiced Apricot", en: "5. Spiced Apricot" },
     ingredients: {
       pl: ["Wódka smakowa (morelowa)", "Spiced Rum", "Sok czarnej porzeczki"],
       en: ["Flavored vodka (apricot)", "Spiced Rum", "Blackcurrant juice"]
@@ -65,7 +65,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Honey Caramel Cream", en: "Honey Caramel Cream" },
+    name: { pl: "6. Honey Caramel Cream", en: "6. Honey Caramel Cream" },
     ingredients: {
       pl: ["Likier miodowy", "Likier słony karmel", "Sok z cytryny"],
       en: ["Honey liqueur", "Salted caramel liqueur", "Lemon juice"]
@@ -77,7 +77,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Cherry Bourbon Smash", en: "Cherry Bourbon Smash" },
+    name: { pl: "7. Cherry Bourbon Smash", en: "7. Cherry Bourbon Smash" },
     ingredients: {
       pl: ["Bourbon", "Wódka smakowa (wiśniowa)", "Syrop malinowy"],
       en: ["Bourbon", "Flavored vodka (cherry)", "Raspberry syrup"]
@@ -89,7 +89,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Mint Julep", en: "Mint Julep" },
+    name: { pl: "8. Mint Julep", en: "8. Mint Julep" },
     ingredients: {
       pl: ["Bourbon", "Sok z cytryny", "Świeża mięta"],
       en: ["Bourbon", "Lemon juice", "Fresh mint leaves"]
@@ -101,7 +101,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Mimosa", en: "Mimosa" },
+    name: { pl: "9. Mimosa", en: "9. Mimosa" },
     ingredients: {
       pl: ["Sok pomarańczowy", "Wermut"],
       en: ["Orange juice", "Vermouth"]
@@ -113,7 +113,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Tom Collins", en: "Tom Collins" },
+    name: { pl: "10. Tom Collins", en: "10. Tom Collins" },
     ingredients: {
       pl: ["Gin", "Sok z cytryny", "Syrop cukrowy", "Woda gazowana"],
       en: ["Gin", "Lemon juice", "Simple syrup", "Sparkling water"]
@@ -125,7 +125,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Spiced Orange Old Fashioned", en: "Spiced Orange Old Fashioned" },
+    name: { pl: "11. Spiced Orange Old Fashioned", en: "11. Spiced Orange Old Fashioned" },
     ingredients: {
       pl: ["Rum", "Passion Fruit Syrup", "Sok pomarańczowy"],
       en: ["Rum", "Passion Fruit Syrup", "Orange juice"]
@@ -137,7 +137,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Caribbean Sunset", en: "Caribbean Sunset" },
+    name: { pl: "12. Caribbean Sunset", en: "12. Caribbean Sunset" },
     ingredients: {
       pl: ["Rum", "Passion Fruit Syrup", "Sok ananasowy"],
       en: ["Rum", "Passion Fruit Syrup", "Pineapple juice"]
@@ -149,7 +149,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Daiquiri", en: "Daiquiri" },
+    name: { pl: "13. Daiquiri", en: "13. Daiquiri" },
     ingredients: {
       pl: ["Rum", "Syrop cukrowy", "Sok z limonki"],
       en: ["Rum", "Simple syrup", "Lime juice"]
@@ -161,7 +161,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Cosmopolitan", en: "Cosmopolitan" },
+    name: { pl: "14. Cosmopolitan", en: "14. Cosmopolitan" },
     ingredients: {
       pl: ["Wódka", "Blue Curacao", "Syrop żurawinowy", "Sok z cytryny", "Sok z limonki"],
       en: ["Vodka", "Blue Curacao", "Cranberry syrup", "Lemon juice", "Lime juice"]
@@ -174,8 +174,8 @@ const cocktails = [
   },
     {
     name: { 
-      pl: "Espresso Martini", 
-      en: "Espresso Martini" 
+      pl: "15. Espresso Martini", 
+      en: "15. Espresso Martini" 
     },
     ingredients: {
       pl: ["Wódka", "Likier mleczny", "Świeże espresso"],
@@ -190,8 +190,8 @@ const cocktails = [
   },
   {
     name: { 
-      pl: "Krwawa Mary", 
-      en: "Bloody Mary" 
+      pl: "16. Krwawa Mary", 
+      en: "16. Bloody Mary" 
     },
     ingredients: {
       pl: ["Wódka", "Sok pomidorowy", "Tabasco", "Sok z cytryny", "Sól i pieprz"],
@@ -205,7 +205,7 @@ const cocktails = [
     image: "drinks/bloody-mary.jpg"
   },
   {
-    name: { pl: "Martini", en: "Martini" },
+    name: { pl: "17. Martini", en: "17. Martini" },
     ingredients: {
       pl: ["Gin", "Wermut"],
       en: ["Gin", "Vermouth"]
@@ -217,7 +217,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "French 75", en: "French 75" },
+    name: { pl: "18. French 75", en: "18. French 75" },
     ingredients: {
       pl: ["Gin", "Sok z cytryny", "Syrop cukrowy", "Wino musujące"],
       en: ["Gin", "Lemon juice", "Simple syrup", "Sparkling wine"]
@@ -229,7 +229,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Piña Colada", en: "Piña Colada" },
+    name: { pl: "19. Piña Colada", en: "19. Piña Colada" },
     ingredients: {
       pl: ["Rum", "Syrop kokosowy", "Sok ananasowy"],
       en: ["Rum", "Coconut syrup", "Pineapple juice"]
@@ -241,7 +241,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Hurricane", en: "Hurricane" },
+    name: { pl: "20. Hurricane", en: "20. Hurricane" },
     ingredients: {
       pl: ["Rum", "Sok owoców cytrusowych", "Syrop żurawinowy"],
       en: ["Rum", "Citrus juice", "Cranberry syrup"]
@@ -253,7 +253,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Cranberry Bliss", en: "Cranberry Bliss" },
+    name: { pl: "21. Cranberry Bliss", en: "21. Cranberry Bliss" },
     ingredients: {
       pl: ["Gin", "Syrop żurawinowy", "Tonik"],
       en: ["Gin", "Cranberry syrup", "Tonic"]
@@ -265,7 +265,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Passion Ginger Martini", en: "Passion Ginger Martini" },
+    name: { pl: "22. Passion Ginger Martini", en: "22. Passion Ginger Martini" },
     ingredients: {
       pl: ["Gin", "Syrop imbirowy", "Syrop marakuja", "Sok z limonki"],
       en: ["Gin", "Ginger syrup", "Passion fruit syrup", "Lime juice"]
@@ -277,7 +277,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Tropical Punch", en: "Tropical Punch" },
+    name: { pl: "23. Tropical Punch", en: "23. Tropical Punch" },
     ingredients: {
       pl: ["Rum", "Sok ananasowy", "Sok pomarańczowy", "Syrop marakuja"],
       en: ["Rum", "Pineapple juice", "Orange juice", "Passion fruit syrup"]
@@ -289,7 +289,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Pornstar Martini", en: "Pornstar Martini" },
+    name: { pl: "24. Pornstar Martini", en: "24. Pornstar Martini" },
     ingredients: {
       pl: ["Wódka", "Syrop waniliowy", "Syrop marakuja", "Sok z limonki", "Prosecco"],
       en: ["Vodka", "Vanilla syrup", "Passion fruit syrup", "Lime juice", "Prosecco"]
@@ -301,7 +301,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Mango Sunrise", en: "Mango Sunrise" },
+    name: { pl: "25. Mango Sunrise", en: "25. Mango Sunrise" },
     ingredients: {
       pl: ["Wódka", "Sok pomarańczowy", "Syrop mango", "Syrop grenadyna"],
       en: ["Vodka", "Orange juice", "Mango syrup", "Grenadine"]
@@ -313,7 +313,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Mazurek", en: "Mazurek" },
+    name: { pl: "26. Mazurek", en: "26. Mazurek" },
     ingredients: {
       pl: ["Wódka smakowa (morelowa)", "Sok z cytryny", "Syrop marakuja", "Tonic"],
       en: ["Flavored vodka (apricot)", "Lemon juice", "Passion fruit syrup", "Tonic"]
@@ -325,7 +325,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Polonez", en: "Polonez" },
+    name: { pl: "27. Polonez", en: "27. Polonez" },
     ingredients: {
       pl: ["Gin", "Sok z cytryny", "Syrop żurawinowy", "Tonic lub Sprite"],
       en: ["Gin", "Lemon juice", "Cranberry syrup", "Tonic or Sprite"]
@@ -337,7 +337,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Ginger Fresh", en: "Ginger Fresh" },
+    name: { pl: "28. Ginger Fresh", en: "28. Ginger Fresh" },
     ingredients: {
       pl: ["Syrop imbirowy", "Sok z cytryny", "Woda gazowana", "Mięta", "Lód"],
       en: ["Ginger syrup", "Lemon juice", "Sparkling water", "Mint leaves", "Ice"]
@@ -349,7 +349,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Berry Boost", en: "Berry Boost" },
+    name: { pl: "29. Berry Boost", en: "30. Berry Boost" },
     ingredients: {
       pl: ["Syrop malinowy", "Sok żurawinowy", "Sok z cytryny", "Woda gazowana", "Lód"],
       en: ["Raspberry syrup", "Cranberry juice", "Lemon juice", "Sparkling water", "Ice"]
@@ -361,7 +361,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Pomegranate Sparkle", en: "Pomegranate Sparkle" },
+    name: { pl: "31. Pomegranate Sparkle", en: "31. Pomegranate Sparkle" },
     ingredients: {
       pl: ["Syrop z granatu", "Sok z cytryny", "Woda gazowana", "Lód"],
       en: ["Pomegranate syrup", "Lemon juice", "Sparkling water", "Ice"]
@@ -373,7 +373,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Passion Fruit Punch", en: "Passion Fruit Punch" },
+    name: { pl: "32. Passion Fruit Punch", en: "32. Passion Fruit Punch" },
     ingredients: {
       pl: ["Syrop z marakui", "Sok pomarańczowy", "Woda gazowana", "Lód"],
       en: ["Passion fruit syrup", "Orange juice", "Sparkling water", "Ice"]
@@ -385,7 +385,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Pineapple Mint Splash", en: "Pineapple Mint Splash" },
+    name: { pl: "33. Pineapple Mint Splash", en: "33. Pineapple Mint Splash" },
     ingredients: {
       pl: ["Sok ananasowy", "Syrop miętowy", "Sok z cytryny", "Lód"],
       en: ["Pineapple juice", "Mint syrup", "Lemon juice", "Ice"]
@@ -397,7 +397,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Mojito Truskawkowe", en: "Strawberry Mojito" },
+    name: { pl: "34. Mojito Truskawkowe", en: "34. Strawberry Mojito" },
     ingredients: {
       pl: ["Mięta", "Limonka", "Syrop truskawkowy", "Woda gazowana"],
       en: ["Mint leaves", "Lime wedge", "Strawberry syrup", "Sparkling water"]
@@ -409,7 +409,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Mojito Marakuja", en: "Passion Fruit Mojito" },
+    name: { pl: "35. Mojito Marakuja", en: "35. Passion Fruit Mojito" },
     ingredients: {
       pl: ["Mięta", "Limonka", "Syrop z marakui", "Woda gazowana"],
       en: ["Mint leaves", "Lime wedge", "Passion fruit syrup", "Sparkling water"]
@@ -421,7 +421,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Mojito Bez", en: "Elderflower Mojito" },
+    name: { pl: "36. Mojito Bez", en: "36. Elderflower Mojito" },
     ingredients: {
       pl: ["Mięta", "Limonka", "Syrop z bzu", "Woda gazowana"],
       en: ["Mint leaves", "Lime wedge", "Elderflower syrup", "Sparkling water"]
@@ -433,7 +433,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Mojito Granat", en: "Pomegranate Mojito" },
+    name: { pl: "37. Mojito Granat", en: "38. Pomegranate Mojito" },
     ingredients: {
       pl: ["Mięta", "Limonka", "Syrop z granatu", "Woda gazowana"],
       en: ["Mint leaves", "Lime wedge", "Pomegranate syrup", "Sparkling water"]
@@ -445,7 +445,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Mojito Pomarańcza", en: "Orange Mojito" },
+    name: { pl: "39. Mojito Pomarańcza", en: "39. Orange Mojito" },
     ingredients: {
       pl: ["Mięta", "Limonka", "Syrop pomarańczowy", "Woda gazowana"],
       en: ["Mint leaves", "Lime wedge", "Orange syrup", "Sparkling water"]
@@ -457,7 +457,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Mojito Kokosowe", en: "Coconut Mojito" },
+    name: { pl: "40. Mojito Kokosowe", en: "40. Coconut Mojito" },
     ingredients: {
       pl: ["Mięta", "Limonka", "Syrop kokosowy", "Woda gazowana"],
       en: ["Mint leaves", "Lime wedge", "Coconut syrup", "Sparkling water"]
@@ -469,7 +469,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Mojito Mango", en: "Mango Mojito" },
+    name: { pl: "41. Mojito Mango", en: "41. Mango Mojito" },
     ingredients: {
       pl: ["Mięta", "Limonka", "Syrop mango", "Woda gazowana"],
       en: ["Mint leaves", "Lime wedge", "Mango syrup", "Sparkling water"]
@@ -481,7 +481,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Irishman", en: "Irishman" },
+    name: { pl: "42. Irishman", en: "42. Irishman" },
     ingredients: {
       pl: ["Irish Cream", "Whiskey"],
       en: ["Irish Cream", "Whiskey"]
@@ -493,7 +493,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Gold Rush", en: "Gold Rush" },
+    name: { pl: "43. Gold Rush", en: "43. Gold Rush" },
     ingredients: {
       pl: ["Whiskey", "Likier miodowy", "Sok z cytryny"],
       en: ["Whiskey", "Honey liqueur", "Lemon juice"]
@@ -505,7 +505,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "The Curious Jackalope", en: "The Curious Jackalope" },
+    name: { pl: "44. The Curious Jackalope", en: "44. The Curious Jackalope" },
     ingredients: {
       pl: ["Gin", "Sok z limonki", "Sok grejpfrutowy", "Syrop cukrowy"],
       en: ["Gin", "Lime juice", "Grapefruit juice", "Simple syrup"]
@@ -517,7 +517,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Old Fashioned", en: "Old Fashioned" },
+    name: { pl: "45. Old Fashioned", en: "45. Old Fashioned" },
     ingredients: {
       pl: ["Bourbon", "Syrop cukrowy", "Angostura bitters"],
       en: ["Bourbon", "Simple syrup", "Angostura bitters"]
@@ -529,7 +529,7 @@ const cocktails = [
     }
   },
   {
-    name: { pl: "Old Virginia Manhattan", en: "Old Virginia Manhattan" },
+    name: { pl: "46. Old Manhattan", en: "46. Old Manhattan" },
     ingredients: {
       pl: ["Bourbon", "Martini Bianco", "Angostura bitters"],
       en: ["Bourbon", "Martini Bianco", "Angostura bitters"]
