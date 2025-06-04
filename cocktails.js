@@ -351,8 +351,8 @@ const cocktails = [
   {
     name: { pl: "29. Berry Boost", en: "30. Berry Boost" },
     ingredients: {
-      pl: ["Syrop malinowy", "Sok żurawinowy", "Sok z cytryny", "Woda gazowana", "Lód"],
-      en: ["Raspberry syrup", "Cranberry juice", "Lemon juice", "Sparkling water", "Ice"]
+      pl: ["Syrop malinowy", "Syrop żurawinowy", "Sok z cytryny", "Woda gazowana", "Lód"],
+      en: ["Raspberry syrup", "Cranberry syrup", "Lemon juice", "Sparkling water", "Ice"]
     },
     category: "non_alcoholic",
     description: {
