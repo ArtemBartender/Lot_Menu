@@ -163,8 +163,8 @@ const cocktails = [
   {
     name: { pl: "14. Cosmopolitan", en: "14. Cosmopolitan" },
     ingredients: {
-      pl: ["Wódka", "Blue Curacao", "Syrop żurawinowy", "Sok z cytryny", "Sok z limonki"],
-      en: ["Vodka", "Blue Curacao", "Cranberry syrup", "Lemon juice", "Lime juice"]
+      pl: ["Wódka", "Triple Sec", "Syrop żurawinowy", "Sok z limonki"],
+      en: ["Vodka", "Triple Sec", "Cranberry syrup", "Lime juice"]
     },
     category: "vodka",
     description: {
