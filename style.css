@@ -1,49 +1,54 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
-body {
-  position: relative;
-  font-family: 'Montserrat', sans-serif;
-  background-color: #413a31;
-  color: #f0ffff;
-  text-align: center;
+/* ========== Variables & Reset ========== */
+:root {
+  --clr-bg-image: url('icons/LOT_Tlo_4.jpg');
+  --clr-bg-fallback: #413a31;
+  --clr-text: #f0ffff;
+  --clr-accent: #db620a;
+  --clr-accent-dark: #8b5831;
+  --clr-bg-dark: rgba(42,45,100,0.15);
+  --radius-sm: 8px;
+  --radius-lg: 20px;
+  --transition: 0.2s;
+}
+
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  z-index: 0;
 }
 
-.cocktail-card {
-  -webkit-tap-highlight-color: transparent;
-  tap-highlight-color: transparent;
+/* ========== Base ========== */
+html {
+  height: 100%;
+  overscroll-behavior: none;
 }
-
-.header-logo-link {
-  display: inline-block;
-  cursor: pointer;
+body {
+  position: relative;
+  min-height: 100%;
+  font-family: 'Montserrat', sans-serif;
+  background: var(--clr-bg-fallback);
+  color: var(--clr-text);
+  text-align: center;
 }
-
 body::before {
-  content: "";
+  content: '';
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: url('icons/LOT_Tlo_4.jpg') center/cover no-repeat;
+  inset: 0;
+  background: var(--clr-bg-image) center/cover no-repeat;
   filter: blur(8px);
   transform: scale(1.05);
   z-index: -1;
 }
 
+/* ========== Header ========== */
 .site-header {
   position: fixed;
-  top: 0;
-  left: 0;
-  /* вместо width:100% ставим 100vw */
+  top: 0; left: 0;
   width: 100vw;
   height: 60px;
-  /* ваш фон */
-  background:
-    linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
-  background-color: rgba(0, 0, 0, 0.4);
-  -webkit-backdrop-filter: blur(10px);
+  background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5));
   backdrop-filter: blur(10px);
   display: flex;
   justify-content: space-between;
@@ -52,169 +57,306 @@ body::before {
   box-shadow: 0 4px 6px rgba(0,0,0,0.22);
   z-index: 1000;
 }
-/* По умолчанию */
 .site-header .header-logo {
   height: 40px;
-  width: auto;
   margin-right: 16px;
+  filter: brightness(0) invert(1);
 }
-
-/* убираем фон у body, переезжаем на html */
-html {
-  /* здесь ваш фон */
-  background: url('icons/LOT_Tlo_4.jpg') center/cover fixed #003366;
-  /* чтобы ни один bounce не «пролезал» */
-  overscroll-behavior: none;
-  height: 100%;
+.site-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
 }
-body {
-  margin: 0;
-  padding: 0;
-  background: none;
-  height: 100%;
-}
-
-/* контейнер, в котором будет реальный scroll */
-.scroll-container {
-  height: 100vh;            /* на всю высоту окна */
-  overflow-y: auto;         /* скроллим только его */
-  -webkit-overflow-scrolling: touch; /* плавный скролл на iOS */
-  overscroll-behavior: contain;      /* не даём контейнеру «выпрыгивать» */
-}
-
-/* На экранах до 600px ширины — уменьшаем логотип */
-@media only screen and (max-width: 600px) {
+@media (max-width: 600px) {
   .site-header .header-logo {
-    height: 28px !important;
-    margin-right: 8px !important;
+    height: 28px;
+    margin-right: 8px;
   }
 }
 
-.site-header h2 {
-  margin: 0;
-  color: white;
-  font-size: 1.25rem;
-  font-weight: 600;
-}
-
+/* ========== Language Switch ========== */
 .language-switch {
-  display: flex; align-items: center; gap: 10px;
-  margin-right: 40px; position: relative; top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 16px;
 }
-
 .language-switch button {
-  background: transparent; border: none; padding: 4px; cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
 }
-.flag-icon { height: 24px; width: auto; }
+.flag-icon {
+  height: 24px; width: auto;
+}
 
+/* ========== Container & Title ========== */
 .container {
-  padding: 80px 20px 20px;
+  max-width: 1200px;
+  margin: 80px auto 0;
+  padding: 0 20px 20px;
+}
+#page-title {
+  margin-bottom: 16px;
+  font-size: 1.75rem;
 }
 
-/* Стили для активной категории */
+/* ========== Search Bar ========== */
+.search-bar {
+  width: 100%;
+  padding: 0 16px;
+  margin: 20px 0;
+}
+#drink-search {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 1rem;
+  color: var(--clr-text);
+  background: rgba(0,0,0,0.6);
+  border: 2px solid rgba(240,255,255,0.8);
+  border-radius: 30px;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);
+  transition: border-color var(--transition), background var(--transition);
+}
+#drink-search::placeholder {
+  color: rgba(240,255,255,0.6);
+}
+#drink-search:focus {
+  outline: none;
+  border-color: var(--clr-accent);
+  background: rgba(0,0,0,0.7);
+}
+@media (max-width: 480px) {
+  #drink-search {
+    font-size: 0.9rem;
+    padding: 10px 12px;
+  }
+}
+
+/* ========== Surprise Button ========== */
+.surprise-btn {
+  display: block;
+  margin: 0 auto 20px;
+  background-color: var(--clr-accent);
+  color: var(--clr-text);
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 12px 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.surprise-btn:hover {
+  background-color: var(--clr-accent-dark);
+}
+
+/* ========== Category Switch ========== */
+.category-switch {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.category-switch button {
+  background-color: #041e42;
+  color: var(--clr-text);
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background var(--transition), box-shadow var(--transition);
+}
+.category-switch button:hover,
 .category-switch button.active {
   background-color: #3d4d56;
-  color: white;
   box-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
 
-.category-switch button {
-  font-family: 'Montserrat', sans-serif;
-  background-color: #041e42;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  padding: 10px 20px;
-  margin: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color .2s;
+/* ========== Cocktail List & Cards ========== */
+.cocktail-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 18px;
+  padding: 0 20px;
 }
-.category-switch button:hover {
-  background-color: #3d4d56;
-}
-
 .cocktail-card {
-  width: 80%; max-width: 500px;
-  margin: 20px auto;
   perspective: 1000px;
   cursor: pointer;
-  transition: transform 0.2s;
-  touch-action: manipulation;
+  transition: transform var(--transition);
 }
-
-.cocktail-card:active {
-  transform: translateY(-2px) scale(0.98);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-} 
-
 .cocktail-card:hover {
   transform: translateY(-4px);
+}
+.cocktail-card:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+/* ========== Flip–карточка с динамической высотой ========== */
+.cocktail-card {
+  perspective: 1000px;
 }
 
 .card-inner {
   display: grid;
   grid-template-areas: "frontback";
+  /* контейнер растягивается по высоте самого большого из детей */
   transform-style: preserve-3d;
   transition: transform 0.6s ease;
 }
 
-.cocktail-card.flipped .card-inner {
-  transform: rotateY(180deg);
-}
-
+/* оба лица в одной ячейке грида */
 .card-front,
 .card-back {
   grid-area: frontback;
   backface-visibility: hidden;
-  border-radius: 10px;
-  padding: 15px;
-  box-sizing: border-box;
-  background-color: rgba(42, 45, 100,0.15);
+  padding: 12px;               /* можно чуть уменьшить */
+  border-radius: var(--radius-sm);
+  background-color: var(--clr-bg-dark);
 }
 
-.card-front .cocktail-img {
-  display: none;
-}
-
+/* задняя сторона */
 .card-back {
   transform: rotateY(180deg);
-  background-color: rgba(42, 45, 100,0.15);
   display: flex;
   align-items: center;
   justify-content: center;
   font-style: italic;
-  color: #f0ffff;
+  color: var(--clr-text);
 }
 
-.card-front h2 {
-  color: #f0ffff;
-  margin: 0 0 10px;
+/* при добавлении flipped – поворот */
+.cocktail-card.flipped .card-inner {
+  transform: rotateY(180deg);
 }
 
-.card-front p {
-  color: #f0ffff;
-  margin: 2px 0;
+/* ========== Feedback Button ========== */
+.feedback-btn {
+  display: block;
+  margin: 20px auto;
+  background-color: var(--clr-accent);
+  color: var(--clr-text);
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 12px 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.feedback-btn:hover {
+  background-color: var(--clr-accent-dark);
 }
 
-.surprise-btn {
-  font-family: 'Montserrat', sans-serif;
-  background-color: #db620a;
-  color: white; border: none; border-radius: 20px;
-  padding: 10px 20px; margin: 10px 0 20px;
-  font-size: 16px; cursor: pointer;
-  transition: background-color .2s;
+/* ========== Modal Overlay ========== */
+.feedback-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
 }
-.surprise-btn:hover {
-  background-color: #8b5831;
+.feedback-modal.hidden {
+  display: none;
 }
 
+/* ========== Modal Content ========== */
+.modal-content {
+  position: relative;
+  width: 90%;
+  max-width: 400px;
+  background: rgba(42,45,100,0.85);
+  padding: 24px 20px;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  text-align: left;
+}
+.modal-close {
+  position: absolute;
+  top: 12px; right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--clr-text);
+  cursor: pointer;
+}
+.modal-content h2 {
+  margin: 0 0 16px;
+  font-size: 1.25rem;
+  text-align: center;
+  color: var(--clr-text);
+}
+
+/* ========== Feedback Form ========== */
+#feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+#feedback-form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.95rem;
+  color: var(--clr-text);
+}
+#feedback-form input[type="email"],
+#feedback-form textarea {
+  margin-top: 6px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(240,255,255,0.3);
+  background: rgba(0,0,0,0.5);
+  color: var(--clr-text);
+  font-size: 1rem;
+  resize: vertical;
+  transition: border-color var(--transition), background var(--transition);
+}
+#feedback-form input::placeholder,
+#feedback-form textarea::placeholder {
+  color: rgba(240,255,255,0.6);
+}
+#feedback-form input:focus,
+#feedback-form textarea:focus {
+  outline: none;
+  border-color: var(--clr-accent);
+  background: rgba(0,0,0,0.6);
+}
+
+/* ========== Send Button ========== */
+.feedback-send {
+  background: var(--clr-accent);
+  color: var(--clr-text);
+  padding: 12px;
+  font-size: 1rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--transition), transform 0.1s;
+}
+.feedback-send:hover {
+  background: var(--clr-accent-dark);
+}
+.feedback-send:active {
+  transform: scale(0.97);
+}
+
+/* ========== Footer ========== */
 footer {
   margin-top: 40px;
-  font-size: 16px;
-  color: #f0ffff;
+  font-size: 0.9rem;
+  color: var(--clr-text);
+  text-align: center;
 }
 
-.header-logo {
-  filter: brightness(0) invert(1);
+/* ========== Responsive ========== */
+@media (max-width: 480px) {
+  .modal-content { padding: 20px 12px; }
+  #feedback-form { gap: 12px; }
+  .feedback-send {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
 }

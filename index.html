@@ -4,20 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
+
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-B9TLTDS3W2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B9TLTDS3W2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-B9TLTDS3W2');
+  </script>
 
-  gtag('config', 'G-B9TLTDS3W2');
-</script>
-
-  
   <title>Menu Koktajli LOT</title>
-
   <link rel="stylesheet" href="style.css" />
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" href="./icons/favicon.ico" type="image/x-icon">
@@ -27,15 +24,6 @@
 </head>
 <body>
 
-  <!-- ========== Age-gate overlay ========== 
-  <div id="age-modal" class="age-modal">
-    <div class="age-modal__content">
-      <p>Czy masz ukończone 18 lat?</p>
-      <button id="age-yes">Tak</button>
-      <button id="age-no">Nie</button>
-    </div>
-  </div>
--->
   <!-- ========== Фиксированная шапка ========== -->
   <header class="site-header">
     <a href="https://www.lot.com/pl/pl" class="header-logo-link">
@@ -56,8 +44,18 @@
   <div class="container">
     <h1 id="page-title">Menu drinków</h1>
 
+    <!-- Поисковая строка -->
+    <section class="search-bar">
+      <input
+        type="text"
+        id="drink-search"
+        placeholder="🔍 Znajdź napój…"
+        autocomplete="off"
+      />
+    </section>
+
     <!-- Кнопка «Сюрприз мне коктейль» -->
-    <button id="surprise-btn" class="surprise-btn"></button>
+    <button id="surprise-btn" class="surprise-btn">Zaskocz mnie koktajlem</button>
 
     <div class="category-switch" id="category-buttons"></div>
     <div class="cocktail-list" id="cocktail-list"></div>
@@ -67,10 +65,63 @@
         Najlepszym podziękowaniem będzie Twoja opinia.
       </p>
     </footer>
+
+  <!-- Кнопка «Предложить коктейль» -->
+<button id="feedback-btn" class="feedback-btn">
+  Zaproponuj drink
+</button>
+
+<!-- Модальное окно для отзывов -->
+<div id="feedback-modal" class="feedback-modal hidden">
+  <div class="modal-content">
+    <button id="feedback-close" class="modal-close">&times;</button>
+
+    <h2 id="feedback-title">Masz propozycję koktajlu?</h2>
+
+    <!-- Форма Formspree -->
+    <form
+      id="feedback-form"
+      action="https://formspree.io/f/movwkqyz"
+      method="POST"
+    >
+      <div id="feedback-email-group">
+        <label for="feedback-email" id="feedback-email-label">
+          Twój e-mail (opcjonalnie):
+        </label>
+        <input
+          type="email"
+          name="email"
+          id="feedback-email"
+          placeholder="twój@email.com"
+        />
+      </div>
+
+      <div id="feedback-message-group">
+        <label for="feedback-message" id="feedback-message-label">
+          Twoja propozycja:
+        </label>
+        <textarea
+          name="message"
+          id="feedback-message"
+          rows="4"
+          required
+          placeholder="Wpisz nazwę koktajlu lub swoje uwagi…"
+        ></textarea>
+      </div>
+
+      <button
+        type="submit"
+        id="feedback-send"
+        class="feedback-send"
+      >Wyślij</button>
+    </form>
+  </div>
+</div>
+
+
   </div>
 
   <script src="cocktails.js"></script>
- 
 
   <script>
     if ('serviceWorker' in navigator) {
@@ -87,26 +138,8 @@
         'noopener'
       );
     });
-/*
-    // Age-gate logic
-    const ageModal = document.getElementById('age-modal');
-    const btnYes   = document.getElementById('age-yes');
-    const btnNo    = document.getElementById('age-no');
-
-    btnYes.addEventListener('click', () => {
-      ageModal.style.display = 'none';
-      changeLanguage(language);
-    });
-    btnNo.addEventListener('click', () => {
-      ageModal.style.display = 'none';
-      currentCategory = 'non_alcoholic';
-      changeLanguage(language);
-    });
-*/
-    window.addEventListener('load', () => {
-      ageModal.style.display = 'flex';
-    });
   </script>
+
   <script src="script.js"></script>
 </body>
 </html>
